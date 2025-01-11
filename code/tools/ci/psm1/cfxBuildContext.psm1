@@ -94,9 +94,9 @@ function Get-CfxBuildContext {
         [switch] $RequireProductName
     )
 
-    # if (!$env:CI) {
-    #     throw "These scripts are only meant to run by CI/CD"
-    # }
+    if (!$env:CI) {
+        throw "These scripts are only meant to run by CI/CD"
+    }
 
     $ctx = [CfxBuildContext]::new()
 
