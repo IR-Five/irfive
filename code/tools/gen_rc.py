@@ -31,9 +31,9 @@ BEGIN
     BEGIN
         BLOCK "040904b0"
         BEGIN
-            VALUE "CompanyName", "Cfx.re"
+            VALUE "CompanyName", "IRFive"
 #if defined(GTA_FIVE)
-			VALUE "FileDescription", "{1} for FiveM"
+			VALUE "FileDescription", "{1} for IRFive"
 #elif defined(IS_RDR3)
 			VALUE "FileDescription", "{1} for RedM"
 #elif defined(IS_FXSERVER)

@@ -589,7 +589,7 @@ static BOOL WINAPI Process32NextWHook(HANDLE hSnapshot, LPPROCESSENTRY32W lppe)
 		while (rv &&
 			(StrStrIW(lppe->szExeFile, L"GTA5.exe") ||
 			 StrStrIW(lppe->szExeFile, L"RDR2.exe") ||
-			 StrStrIW(lppe->szExeFile, L"FiveM") ||
+			 StrStrIW(lppe->szExeFile, L"IRFive") ||
 			 StrStrIW(lppe->szExeFile, L"RedM")))
 		{
 			rv = Process32NextW(hSnapshot, lppe);

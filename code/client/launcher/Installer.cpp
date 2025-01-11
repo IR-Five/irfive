@@ -65,7 +65,7 @@ static std::wstring GetRootPath()
 	if (!appDataPath.empty())
 	{
 #ifdef GTA_FIVE
-		appDataPath += L"\\FiveM";
+		appDataPath += L"\\IRFive";
 #elif defined(IS_RDR3)
 		appDataPath += L"\\RedM";
 #else
@@ -375,7 +375,7 @@ void Install_RunPostInstall()
 
 	std::initializer_list<std::tuple<std::wstring, std::wstring, int, std::wstring>> links = {
 #ifdef GTA_FIVE
-		{ L" - Cfx.re Development Kit (FxDK)", L"-fxdk", -203, L"CitizenFX.FiveM.SDK" },
+		{ L" - Cfx.re Development Kit (FxDK)", L"-fxdk", -203, L"CitizenFX.IRFive.SDK" },
 #endif
 	};
 

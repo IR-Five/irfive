@@ -206,7 +206,7 @@ public:
 )",
 #ifdef GTA_FIVE
 			"Grand Theft Auto V",
-			"FiveM"
+			"IRFive"
 #elif defined(IS_RDR3)
 			"Red Dead Redemption 2 or Red Dead Online",
 			"RedM"
