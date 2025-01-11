@@ -15,6 +15,7 @@ using module .\psm1\cfxSentry.psm1
 using module .\psm1\cfxUpdateVersionFiles.psm1
 using module .\psm1\cfxUploadClientSymbols.psm1
 using module .\psm1\cfxVersions.psm1
+using module .\psm1\cfxPubClient.psm1
 
 try {
     $ctx = Get-CfxBuildContext -RequireProductName
