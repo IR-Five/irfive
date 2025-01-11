@@ -108,7 +108,7 @@ BEGIN
             VALUE "InternalName", PRODUCT
             VALUE "FileVersion", "2.0.0." STR(EXE_VERSION)
             VALUE "LegalCopyright", "(C) 2015-2022  Diamond RP"
-            VALUE "OriginalFilename", "CitizenMP.exe"
+            VALUE "OriginalFilename", "IRFive.exe"
             VALUE "ProductName", PRODUCT
             VALUE "ProductVersion", "2.0.0." STR(EXE_VERSION)
         END
