@@ -59,7 +59,7 @@ function Invoke-PackClient {
     Copy-Item -Force -Recurse $binRoot\citizen\*         $packRoot\citizen\
 	
     if ($Context.IS_FIVEM) {
-        Copy-Item -Force $binRoot\FiveM_Diag.exe $packRoot\
+        Copy-Item -Force $binRoot\IRFive_Diag.exe $packRoot\
     }
 
     # Adding UI
