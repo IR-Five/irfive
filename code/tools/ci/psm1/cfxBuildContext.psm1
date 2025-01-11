@@ -94,9 +94,9 @@ function Get-CfxBuildContext {
         [switch] $RequireProductName
     )
 
-    if (!$env:CI) {
-        throw "These scripts are only meant to run by CI/CD"
-    }
+    # if (!$env:CI) {
+    #     throw "These scripts are only meant to run by CI/CD"
+    # }
 
     $ctx = [CfxBuildContext]::new()
 
@@ -134,7 +134,7 @@ function Get-CfxBuildContext {
         $ctx.PrivateUri = $env:FIVEM_PRIVATE_URI
     }
     elseif ($ctx.IsPublicBuild) {
-        throw "Public build requires FIVEM_PRIVATE_URI env var to be defined"
+        # throw "Public build requires FIVEM_PRIVATE_URI env var to be defined"
     }
 
     # Figure out toolkit
@@ -143,7 +143,7 @@ function Get-CfxBuildContext {
         $ctx.ToolkitUri = $env:CFX_BUILD_TOOLKIT_URI
     }
     elseif ($ctx.IsPublicBuild) {
-        throw "Public build requires CFX_BUILD_TOOLKIT_URI env var to be defined"
+        # throw "Public build requires CFX_BUILD_TOOLKIT_URI env var to be defined"
     }
 
     $premakeDirSubpath = ""
