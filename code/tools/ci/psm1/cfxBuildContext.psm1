@@ -153,8 +153,8 @@ function Get-CfxBuildContext {
             $ctx.IS_FIVEM = $true
 
             $ctx.ProductName = "fivem"
-            $ctx.ProductName = "irfive"
             $ctx.ProductExeName = "IRFive.exe"
+            $ctx.PremakeGameName = "five"
             $ctx.SentryProjectName = Get-EnvOrDefault $env:CFX_SENTRY_PROJECT_NAME_FIVEM "fivem-client-1604"
 
             break
