@@ -76,6 +76,10 @@ try {
         Invoke-PackClient -Context $ctx -Tools $tools -Versions $versions
     }.GetNewClosure()
 
+    Invoke-LogSection "Uploading client" {
+        Invoke-PubClient -Context $ctx
+    }.GetNewClosure()   
+
     if ($ctx.IsPublicBuild) {
         Invoke-LogSection "Creating sentry release" {
             $sentryVersion = "cfx-{0}" -f $versions.BuildID
