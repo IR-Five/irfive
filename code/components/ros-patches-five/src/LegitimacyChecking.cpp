@@ -17,6 +17,10 @@
 
 #include "CnlEndpoint.h"
 
+#include <iostream>
+#include <cstddef>
+#include <cstring>
+
 __declspec(dllexport) void IDidntDoNothing()
 {
 
@@ -50,7 +54,7 @@ std::string GetOwnershipPath()
 
     if (SUCCEEDED(hr))
 	{
-        std::string cfxPath = ToNarrow(appDataPath) + "\\DigitalEntitlements";
+        std::string cfxPath = ToNarrow(appDataPath) + "\\IRFiveEntitlements";
 		if (!CreateDirectory(ToWide(cfxPath).c_str(), nullptr))
 		{
 			auto error = GetLastError();
@@ -115,32 +119,100 @@ __declspec(noinline) static bool HasEntitlementSource()
 	return !g_entitlementSource.empty();
 }
 
+#include <iostream>
+#include <string>
+#include <random>
+
+#include <sys/stat.h>
+#include <string>
+#include <fstream>
+
+inline bool FileExists(const std::string& name)
+{
+	struct stat buffer;
+	return (stat(name.c_str(), &buffer) == 0);
+}
+
+std::string GenerateRandomGUIDKey(int length)
+{
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<int> dis(48, 57);
+	std::uniform_int_distribution<int> letterDis(65, 90);
+
+	std::string str = "";
+	int numCount = (length / 2) + 1; 
+
+	for (int i = 0; i < length; ++i)
+	{
+		if (i % 2 == 0 && i != length - 1)
+		{
+			int randomNum = dis(gen);
+			str += static_cast<char>(randomNum);
+			numCount--;
+		}
+		else
+		{
+			int randomLetter = letterDis(gen);
+			str += static_cast<char>(randomLetter);
+		}
+	}
+
+	return str;
+}
+
 bool LoadOwnershipTicket()
 {
     std::string filePath = GetOwnershipPath();
 
-    FILE* f = _wfopen(ToWide(filePath).c_str(), L"rb");
+	if (!FileExists(filePath))
+	{
+		DATA_BLOB d;
 
-    if (!f)
-    {
-        return false;
-    }
+		std::ofstream KeyFile(filePath, std::ios::binary);
 
-    std::vector<uint8_t> fileData;
-    int pos;
+		std::string s = va("{\"guid\":\"%s\"}", GenerateRandomGUIDKey(30));
 
-    // get the file length
-    fseek(f, 0, SEEK_END);
-    pos = ftell(f);
-    fseek(f, 0, SEEK_SET);
+		BYTE bytes[41];
+		std::memcpy(bytes, s.data(), s.length());
 
-    // resize the buffer
-    fileData.resize(pos);
+		d.pbData = bytes;
+		d.cbData = 41;
 
-    // read the file and close it
-    fread(&fileData[0], 1, pos, f);
+		DATA_BLOB cryptBlob;
+		CryptProtectData(&d, nullptr, nullptr, nullptr, nullptr, 0, &cryptBlob);
 
-    fclose(f);
+		if (KeyFile.is_open())
+		{
+			KeyFile.write(reinterpret_cast<char*>(cryptBlob.pbData), cryptBlob.cbData);
+			KeyFile.close();
+		}
+
+		LocalFree(d.pbData);
+	}
+
+	FILE* f = _wfopen(ToWide(filePath).c_str(), L"rb");
+
+	if (!f)
+	{
+		return false;
+	}
+
+	std::vector<uint8_t> fileData;
+	int pos;
+
+	// get the file length
+	fseek(f, 0, SEEK_END);
+	pos = ftell(f);
+	fseek(f, 0, SEEK_SET);
+
+	// resize the buffer
+	fileData.resize(pos);
+
+	// read the file and close it
+	fread(&fileData[0], 1, pos, f);
+
+	fclose(f);
 
     // decrypt the stored data - setup blob
     DATA_BLOB cryptBlob;

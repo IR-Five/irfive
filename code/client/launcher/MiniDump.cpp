@@ -519,7 +519,7 @@ std::string GetOwnershipPath()
 {
 	PWSTR appDataPath;
 	if (SUCCEEDED(SHGetKnownFolderPath(FOLDERID_LocalAppData, 0, nullptr, &appDataPath))) {
-		std::string cfxPath = ToNarrow(appDataPath) + "\\DigitalEntitlements";
+		std::string cfxPath = ToNarrow(appDataPath) + "\\IRFiveEntitlements";
 		CreateDirectory(ToWide(cfxPath).c_str(), nullptr);
 
 		CoTaskMemFree(appDataPath);

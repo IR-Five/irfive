@@ -82,7 +82,7 @@ std::string GetFilePath(const std::string& str)
 {
 	PWSTR appDataPath;
 	if (SUCCEEDED(SHGetKnownFolderPath(FOLDERID_LocalAppData, 0, nullptr, &appDataPath))) {
-		std::string cfxPath = ToNarrow(appDataPath) + "\\DigitalEntitlements";
+		std::string cfxPath = ToNarrow(appDataPath) + "\\IRFiveEntitlements";
 		CreateDirectory(ToWide(cfxPath).c_str(), nullptr);
 
 		CoTaskMemFree(appDataPath);
@@ -161,33 +161,33 @@ std::string GetEntitlementBlock(uint64_t accountId, const std::string& machineHa
 	
 	if (!success)
 	{
-		auto r = cpr::Post(
-			cpr::Url{ CNL_ENDPOINT "api/validate/entitlement" },
-			cpr::Payload{
-				{ "entitlementId", ros::GetEntitlementSource() },
-				{ "machineHash", machineHash },
-				{ "rosId", fmt::sprintf("%lld", accountId) }
-			});
+		// auto r = cpr::Post(
+		// 	cpr::Url{ CNL_ENDPOINT "api/validate/entitlement" },
+		// 	cpr::Payload{
+		// 		{ "entitlementId", ros::GetEntitlementSource() },
+		// 		{ "machineHash", machineHash },
+		// 		{ "rosId", fmt::sprintf("%lld", accountId) }
+		// 	});
 
-		if (r.error || r.status_code >= 400)
-		{
-			if (r.status_code == 401)
-			{
-				DeleteFileW(ToWide(GetOwnershipPath()).c_str());
-			}
+		// if (r.error || r.status_code >= 400)
+		// {
+		// 	if (r.status_code == 401)
+		// 	{
+		// 		DeleteFileW(ToWide(GetOwnershipPath()).c_str());
+		// 	}
 
-			FatalError("Could not contact entitlement service. Status code: %d, error message: %d/%s, response body: %s", r.status_code, (int)r.error.code, r.error.message, r.text);
-		}
+		// 	FatalError("Could not contact entitlement service. Status code: %d, error message: %d/%s, response body: %s", r.status_code, (int)r.error.code, r.error.message, r.text);
+		// }
 
-		f = _wfopen(ToWide(filePath).c_str(), L"wb");
+		// f = _wfopen(ToWide(filePath).c_str(), L"wb");
 
-		if (f)
-		{
-			fwrite(r.text.c_str(), 1, r.text.size(), f);
-			fclose(f);
-		}
+		// if (f)
+		// {
+		// 	fwrite(r.text.c_str(), 1, r.text.size(), f);
+		// 	fclose(f);
+		// }
 
-		outStr = r.text;
+		// outStr = r.text;
 	}
 
 	return outStr;
