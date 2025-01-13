@@ -27,7 +27,7 @@ export const Footer = observer(function Footer() {
       <Flex repell>
         <AuxiliaryGameModes />
 
-        <Flex>
+        {/* <Flex>
           <Title fixedOn="top" title="Learn how to create your own customized content for your server or game!">
             <AnalyticsLinkButton
               to="https://docs.fivem.net/docs/scripting-manual/introduction/"
@@ -48,7 +48,7 @@ export const Footer = observer(function Footer() {
               elementPlacement={ElementPlacements.Footer}
             />
           </Title>
-        </Flex>
+        </Flex> */}
       </Flex>
     </Flex>
   );

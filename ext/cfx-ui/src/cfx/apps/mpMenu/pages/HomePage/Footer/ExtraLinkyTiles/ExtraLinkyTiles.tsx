@@ -30,7 +30,7 @@ export const ExtraLinkyTiles = observer(function ExtraLinkyTiles() {
 
   return (
     <Flex fullWidth gap="large">
-      <StartYourServerPromo />
+      {/* <StartYourServerPromo />
 
       <a href={link} className={s.tile} onClick={handleClick}>
         <Flex gap="large">
@@ -46,7 +46,7 @@ export const ExtraLinkyTiles = observer(function ExtraLinkyTiles() {
             <Text opacity="50">{description}</Text>
           </Flex>
         </Flex>
-      </a>
+      </a> */}
     </Flex>
   );
 });

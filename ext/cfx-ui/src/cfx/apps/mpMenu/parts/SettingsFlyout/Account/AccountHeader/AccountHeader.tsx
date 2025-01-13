@@ -15,11 +15,11 @@ export const AccountHeader = observer(function AccountHeader() {
   const AuthService = useAuthService();
   const AccountService = useAccountService();
 
-  if (!AccountService.account) {
-    return (
-      <Button size="large" text={$L('#BottomNav_LinkAccount')} theme="primary" onClick={AuthService.openAuthUI} />
-    );
-  }
+  // if (!AccountService.account) {
+  //   return (
+  //     <Button size="large" text={$L('#BottomNav_LinkAccount')} theme="primary" onClick={AuthService.openAuthUI} />
+  //   );
+  // }
 
   return (
     <AccountHeaderSignedIn />

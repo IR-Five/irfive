@@ -58,7 +58,7 @@ export const TopServersBlock = observer(function TopServersBlock() {
 
   return (
     <Box height="calc(var(--height) * .4)">
-      <Flex vertical fullHeight>
+      {/* <Flex vertical fullHeight>
         <Flex repell centered="axis" gap="large">
           <Flex centered="axis">
             <Text size="large" opacity="50" weight="bold">
@@ -76,7 +76,7 @@ export const TopServersBlock = observer(function TopServersBlock() {
         </Flex>
 
         <TopServers />
-      </Flex>
+      </Flex> */}
     </Box>
   );
 });

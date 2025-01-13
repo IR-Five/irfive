@@ -26,9 +26,9 @@ type LegalAcceptanceData = {
 
 @injectable()
 export class LegalService {
-  readonly CURRENT_TOS_VERSION = 'September 12, 2023';
+  readonly CURRENT_TOS_VERSION = 'January 13, 2025';
 
-  readonly TOS_URL = 'https://fivem.net/terms';
+  readonly TOS_URL = 'https://media.diamondrp.ir/terms.pdf';
 
   private readonly currentTOSVersionHash = joaat(`${ASID}.${this.CURRENT_TOS_VERSION}`);
 

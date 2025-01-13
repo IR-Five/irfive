@@ -350,85 +350,85 @@ export class MpMenuServersService implements IServersService, AppContribution {
 
   private async loadPinnedServersConfig() {
     try {
-      /**
-       * Expected schema of `/pins.json` file:
-       *
-       * {
-       *   noAdServer?: string | { title: string, ids: Array<string> },
-       *   noAdServerId?: string, // will be ignored if there's a valid noAdServer
-       *   pinnedServers?: Array<string>,
-       *   pinIfEmpty?: boolean,
-       * }
-       *
-       */
-      const json = await fetcher.json('https://runtime.fivem.net/pins.json');
+    //   /**
+    //    * Expected schema of `/pins.json` file:
+    //    *
+    //    * {
+    //    *   noAdServer?: string | { title: string, ids: Array<string> },
+    //    *   noAdServerId?: string, // will be ignored if there's a valid noAdServer
+    //    *   pinnedServers?: Array<string>,
+    //    *   pinIfEmpty?: boolean,
+    //    * }
+    //    *
+    //    */
+    //   const json = await fetcher.json('https://runtime.fivem.net/pins.json');
 
-      const config: IPinnedServersConfig = {
-        pinnedServers: [],
-      };
+    //   const config: IPinnedServersConfig = {
+    //     pinnedServers: [],
+    //   };
 
-      // Parsing `.noAdServer`,
-      // starting with property supporting both single server join id and servers collection
-      if (json.noAdServer) {
-        const jsonNoAdServer: unknown = json.noAdServer;
+    //   // Parsing `.noAdServer`,
+    //   // starting with property supporting both single server join id and servers collection
+    //   if (json.noAdServer) {
+    //     const jsonNoAdServer: unknown = json.noAdServer;
 
-        // Just one server join id
-        if (typeof jsonNoAdServer === 'string') {
-          config.featuredServer = {
-            type: 'id',
-            id: jsonNoAdServer,
-          };
-        // Servers collection
-        } else if (isObject<Partial<IPinnedServersCollection>>(jsonNoAdServer)) {
-          // `.title` and `.ids` are required
-          if (typeof jsonNoAdServer.title === 'string' && Array.isArray(jsonNoAdServer.ids)) {
-            const serverIds = jsonNoAdServer.ids.map((id) => String(id)).filter(Boolean);
+    //     // Just one server join id
+    //     if (typeof jsonNoAdServer === 'string') {
+    //       config.featuredServer = {
+    //         type: 'id',
+    //         id: jsonNoAdServer,
+    //       };
+    //     // Servers collection
+    //     } else if (isObject<Partial<IPinnedServersCollection>>(jsonNoAdServer)) {
+    //       // `.title` and `.ids` are required
+    //       if (typeof jsonNoAdServer.title === 'string' && Array.isArray(jsonNoAdServer.ids)) {
+    //         const serverIds = jsonNoAdServer.ids.map((id) => String(id)).filter(Boolean);
 
-            if (serverIds.length > 1) {
-              config.featuredServer = {
-                type: 'collection',
-                collection: {
-                  title: jsonNoAdServer.title,
-                  ids: serverIds,
-                },
-              };
-            // Fall back to single server join id if only one id is present
-            } else if (serverIds.length === 1) {
-              config.featuredServer = {
-                type: 'id',
-                id: String(serverIds[0]),
-              };
-            }
-          }
-        }
-      }
+    //         if (serverIds.length > 1) {
+    //           config.featuredServer = {
+    //             type: 'collection',
+    //             collection: {
+    //               title: jsonNoAdServer.title,
+    //               ids: serverIds,
+    //             },
+    //           };
+    //         // Fall back to single server join id if only one id is present
+    //         } else if (serverIds.length === 1) {
+    //           config.featuredServer = {
+    //             type: 'id',
+    //             id: String(serverIds[0]),
+    //           };
+    //         }
+    //       }
+    //     }
+    //   }
 
-      // Parsing old `.noAdServerId` if no featuredServer has been parsed yet
-      if (json.noAdServerId && !config.featuredServer) {
-        if (typeof json.noAdServerId === 'string') {
-          config.featuredServer = {
-            type: 'id',
-            id: json.noAdServerId,
-          };
-        }
-      }
+    //   // Parsing old `.noAdServerId` if no featuredServer has been parsed yet
+    //   if (json.noAdServerId && !config.featuredServer) {
+    //     if (typeof json.noAdServerId === 'string') {
+    //       config.featuredServer = {
+    //         type: 'id',
+    //         id: json.noAdServerId,
+    //       };
+    //     }
+    //   }
 
-      if (json.pinIfEmpty) {
-        config.pinIfEmpty = Boolean(json.pinIfEmpty);
-      }
+    //   if (json.pinIfEmpty) {
+    //     config.pinIfEmpty = Boolean(json.pinIfEmpty);
+    //   }
 
-      if (Array.isArray(json.pinnedServers)) {
-        // TODO: the length is capped to 6 chars to filter out IP:port addresses
-        config.pinnedServers = json.pinnedServers.filter(
-          (address: unknown) => typeof address === 'string' && address.length === 6,
-        );
-      }
+    //   if (Array.isArray(json.pinnedServers)) {
+    //     // TODO: the length is capped to 6 chars to filter out IP:port addresses
+    //     config.pinnedServers = json.pinnedServers.filter(
+    //       (address: unknown) => typeof address === 'string' && address.length === 6,
+    //     );
+    //   }
 
-      this.listSource.setPinnedConfig(config);
-      this.pinnedServersConfig = config;
+    //   this.listSource.setPinnedConfig(config);
+    //   this.pinnedServersConfig = config;
     } catch (e) {
-      this.logger.log('Failed to fetch pinned servers config');
-      console.warn(e);
+    //   this.logger.log('Failed to fetch pinned servers config');
+    //   console.warn(e);
     }
   }
 

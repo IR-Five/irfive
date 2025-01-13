@@ -93,21 +93,13 @@ export class PlatformStatusService {
 
   readonly fetchStatus = async () => {
     try {
-      const status = await fetcher.json('https://status.cfx.re/api/v2/status.json');
+      const status = {}//await fetcher.json('https://status.cfx.re/api/v2/status.json');
 
-      const message = status?.status?.description || '';
+      const message = "All Systems Operational";
 
       switch (message) {
         case 'All Systems Operational':
           this.level = StatusLevel.AllSystemsOperational;
-          break;
-        case 'Partially Degraded Service':
-        case 'Partial System Outage':
-        case 'Minor Service Outage':
-          this.level = StatusLevel.MinorOutage;
-          break;
-        case 'Major Service Outage':
-          this.level = StatusLevel.MajorOutage;
           break;
       }
 
@@ -119,7 +111,7 @@ export class PlatformStatusService {
 
   private async fetchServiceNotice() {
     try {
-      this.setServiceNotice(await fetcher.text(`https://runtime.fivem.net/notice_${CurrentGameName}.html`));
+      this.setServiceNotice('<!--<div class="warning">Reviews are temporarily disabled while we are working to reduce load on our infrastructure.</div>-->');
     } catch (e) {
       this.setServiceNotice('<div class="warning">Could not connect to backend services. Some issues may occur.</div>');
     }
@@ -127,11 +119,7 @@ export class PlatformStatusService {
 
   private async fetchStats() {
     try {
-      const response: [number?, number?, number?] = await fetcher.json(
-        currentGameNameIs(GameName.RedM)
-          ? PLAYER_STATS_REDM
-          : PLAYER_STATS_FIVEM,
-      );
+      const response = [ 0, 0, 0 ]
 
       if (!Array.isArray(response)) {
         return;

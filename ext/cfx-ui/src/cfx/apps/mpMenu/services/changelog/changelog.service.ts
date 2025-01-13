@@ -117,7 +117,7 @@ class ChangelogService implements AppContribution {
 
   private async fetchVersions() {
     try {
-      const versions = await fetcher.json(`${endpoint}/versions`);
+      const versions = []//await fetcher.json(`${endpoint}/versions`);
 
       if (!Array.isArray(versions)) {
         console.warn('Unexpected versions content', versions);

@@ -21,7 +21,7 @@ function MpMenuUI() {
     <>
       <NavigationTracker />
 
-      <AuthModal />
+      {/* <AuthModal /> */}
       <SettingsFlyout />
 
       <LegacyConnectingModal />

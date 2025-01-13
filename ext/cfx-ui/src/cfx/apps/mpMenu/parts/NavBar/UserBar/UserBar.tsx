@@ -77,54 +77,58 @@ export const UserBar = observer(function UserBar() {
     });
   }, [eventHandler, AuthService]);
 
-  if (!AccountService.accountLoadComplete) {
-    return (
-      <Button size="large" theme={buttonTheme} icon={<Indicator />} />
-    );
-  }
-
-  if (AccountService.account) {
-    if (streamerMode) {
-      return (
-        <Button size="large" theme={buttonTheme} icon={Icons.accountLoaded} onClick={handleStreamerClick} />
-      );
-    }
-
-    return (
-      <Title title={getUserAvatarTitle(AccountService.account)}>
-        <Decorate decorator={getUserAvatarDecorator(AccountService.account!)}>
-          <Interactive onClick={handleAvatarClick}>
-            <Avatar size="large" url={AccountService.account!.getAvatarUrl()} />
-          </Interactive>
-        </Decorate>
-      </Title>
-    );
-  }
-
-  if (AccountService.accountLoadError) {
-    const title = (
-      <>
-        {$L('#UserNav_FailedToLoadAccountData')}
-        <br />
-        <br />
-        <strong>{$L('#UserNav_FailedToLoadAccountData_2')}</strong>
-      </>
-    );
-
-    return (
-      <Title title={title}>
-        <Button size="large" theme={buttonTheme} icon={<BsExclamationCircleFill />} />
-      </Title>
-    );
-  }
-
-  const linkAccountButtonTheme = NavBarState.forceTransparentNav
-    ? 'default'
-    : 'primary';
-
   return (
-    <Button theme={linkAccountButtonTheme} size="large" text={$L('#BottomNav_LinkAccount')} onClick={handleAuthClick} />
+    <></>
   );
+
+  // if (!AccountService.accountLoadComplete) {
+  //   return (
+  //     <Button size="large" theme={buttonTheme} icon={<Indicator />} />
+  //   );
+  // }
+
+  // if (AccountService.account) {
+  //   if (streamerMode) {
+  //     return (
+  //       <Button size="large" theme={buttonTheme} icon={Icons.accountLoaded} onClick={handleStreamerClick} />
+  //     );
+  //   }
+
+  //   return (
+  //     <Title title={getUserAvatarTitle(AccountService.account)}>
+  //       <Decorate decorator={getUserAvatarDecorator(AccountService.account!)}>
+  //         <Interactive onClick={handleAvatarClick}>
+  //           <Avatar size="large" url={AccountService.account!.getAvatarUrl()} />
+  //         </Interactive>
+  //       </Decorate>
+  //     </Title>
+  //   );
+  // }
+
+  // if (AccountService.accountLoadError) {
+  //   const title = (
+  //     <>
+  //       {$L('#UserNav_FailedToLoadAccountData')}
+  //       <br />
+  //       <br />
+  //       <strong>{$L('#UserNav_FailedToLoadAccountData_2')}</strong>
+  //     </>
+  //   );
+
+  //   return (
+  //     <Title title={title}>
+  //       <Button size="large" theme={buttonTheme} icon={<BsExclamationCircleFill />} />
+  //     </Title>
+  //   );
+  // }
+
+  // const linkAccountButtonTheme = NavBarState.forceTransparentNav
+  //   ? 'default'
+  //   : 'primary';
+
+  // return (
+  //   <Button theme={linkAccountButtonTheme} size="large" text={$L('#BottomNav_LinkAccount')} onClick={handleAuthClick} />
+  // );
 });
 
 function getUserAvatarTitle(account: IAccount): React.ReactNode {

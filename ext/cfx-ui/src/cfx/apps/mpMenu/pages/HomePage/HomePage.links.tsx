@@ -27,31 +27,19 @@ interface IHomePageNavBarLink {
 const homePageNavBarLinks: IHomePageNavBarLink[] = [
   {
     id: IHomePageNavBarLinkIDs.FiveM,
-    href: 'https://fivem.net',
-    label: 'FiveM.net',
+    href: 'https://irfive.ir',
+    label: 'IRFive.ir',
     visible: () => currentGameNameIs(GameName.FiveM),
   },
   {
-    id: IHomePageNavBarLinkIDs.RedM,
-    href: 'https://redm.net',
-    label: 'RedM.net',
-    visible: () => currentGameNameIs(GameName.RedM),
-  },
-  {
     id: IHomePageNavBarLinkIDs.Forum,
-    href: 'https://forum.cfx.re',
+    href: 'https://forum.irfive.ir',
     label: 'Forum',
     visible: returnTrue,
   },
   {
-    id: IHomePageNavBarLinkIDs.Portal,
-    href: 'https://portal.cfx.re',
-    label: 'Portal',
-    visible: returnTrue,
-  },
-  {
     id: IHomePageNavBarLinkIDs.Discord,
-    href: 'https://discord.gg/fivem',
+    href: 'https://discord.gg/3DTxk7c3zg',
     label: 'Discord',
     visible: returnTrue,
   },

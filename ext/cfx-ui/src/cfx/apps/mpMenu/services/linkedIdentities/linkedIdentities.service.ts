@@ -51,49 +51,49 @@ export class LinkedIdentitiesService implements AppContribution, ILinkedIdentiti
       return;
     }
 
-    try {
-      const json = await fetcher.json(`${__CFXUI_CNL_ENDPOINT__}api/ticket/identities`, {
-        method: 'POST',
-        body: serializeQueryString({
-          token: ownershipTicket,
-          withRockstar,
-        }),
-        headers: {
-          'content-type': 'application/x-www-form-urlencoded',
-        },
-      });
+    // try {
+    //   const json = await fetcher.json(`${__CFXUI_CNL_ENDPOINT__}api/ticket/identities`, {
+    //     method: 'POST',
+    //     body: serializeQueryString({
+    //       token: ownershipTicket,
+    //       withRockstar,
+    //     }),
+    //     headers: {
+    //       'content-type': 'application/x-www-form-urlencoded',
+    //     },
+    //   });
 
-      if (typeof json !== 'object' || json === null) {
-        console.warn('Unexpected response for linked identities', json);
+    //   if (typeof json !== 'object' || json === null) {
+    //     console.warn('Unexpected response for linked identities', json);
 
-        return;
-      }
+    //     return;
+    //   }
 
-      if (!Array.isArray(json.identities)) {
-        console.warn('Unexpected response for linked identities, indetities is not an array', json);
+    //   if (!Array.isArray(json.identities)) {
+    //     console.warn('Unexpected response for linked identities, indetities is not an array', json);
 
-        return;
-      }
+    //     return;
+    //   }
 
-      const linkedIdentities: ILinkedIdentity[] = [];
+    //   const linkedIdentities: ILinkedIdentity[] = [];
 
-      for (const identity of json.identities) {
-        const {
-          username,
-        } = identity;
-        const [provider, id] = identity.id.split(':');
+    //   for (const identity of json.identities) {
+    //     const {
+    //       username,
+    //     } = identity;
+    //     const [provider, id] = identity.id.split(':');
 
-        linkedIdentities.push({
-          id,
-          provider,
-          username,
-        });
-      }
+    //     linkedIdentities.push({
+    //       id,
+    //       provider,
+    //       username,
+    //     });
+    //   }
 
-      this.linkedIdentities.value = linkedIdentities;
-      this.identitiesChange.emit({ linkedIdentities });
-    } catch (e) {
-      console.warn('Failed to fetch linked identities', e);
-    }
+    //   this.linkedIdentities.value = linkedIdentities;
+    //   this.identitiesChange.emit({ linkedIdentities });
+    // } catch (e) {
+    //   console.warn('Failed to fetch linked identities', e);
+    // }
   }
 }

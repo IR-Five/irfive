@@ -43,7 +43,7 @@ export const HomePage = observer(function HomePage() {
           </Flex>
         </FlexRestricter>
 
-        <Flex vertical fullHeight gap="large">
+        {/* <Flex vertical fullHeight gap="large">
           <FlexRestricter vertical>
             <Box height="100%" width="100%">
               <Flex fullHeight gap="thin" className={s.feeds}>
@@ -73,7 +73,7 @@ export const HomePage = observer(function HomePage() {
               </Flex>
             </Box>
           </FlexRestricter>
-        </Flex>
+        </Flex> */}
       </Flex>
     </Page>
   );
